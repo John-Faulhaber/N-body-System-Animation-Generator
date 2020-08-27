@@ -1,5 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
+########################
+### Preliminary code ###
+########################
+
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -355,6 +357,7 @@ def calculateTrajectories(masses,initialPositions,initialVelocities,totalTimeEvo
 ######################################
 ### Choosing the system parameters ###
 ######################################
+### NOTICE: This will create a new system each time it is run. Revisit the this code and save the produced initial values manually ("mytimes", "mypositions", etc.) in a text file (careful not to re-run everything), if the produced animation is favorable, and you wish to save the initial conditions for further use (higher dpi, perhaps a longer animation, more detailed calculations, etc.).
 
 mySystemMass,mySystemPos,mySystemVel=tinyCluster(N=3, maximum_mass=(250*Msun))
 mytimes,mypositions,myvelocities=calculateTrajectories(mySystemMass,mySystemPos,mySystemVel,864000,864)
@@ -374,7 +377,7 @@ FFMpegWriter = ani.writers['ffmpeg']
 writer = ani.FFMpegWriter(fps=60) # the resulting animation can be tempermental depending on this value. Cooperation seems to vary across monitors.
 fig = plt.figure()
 fileName="N-Body_Animation.mp4"
-with writer.saving(fig, fileName, 400): # the 400 here is the dpi of the produced frames. See matplotlib.animation parameters for further options. 
+with writer.saving(fig, fileName, 400): # the number here is the dpi of the produced frames (higher dpi = higher quality, longer run time). If you do not have a very fast computer, start with a much lower value (ie. 40), and increase as your patience permits. See matplotlib.animation parameters for further options. 
     print "Starting animation creation..."
     fc=range(len(mytimes))  # frame count
     
